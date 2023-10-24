@@ -2,6 +2,7 @@
 __pycache__/*
 *.py[cod]
 *$py.class
+# commeny
 
 django_project/__pycache__/settings.cpython-311.pyc
 django_project/__pycache__/urls.cpython-311.pyc
