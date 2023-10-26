@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Player(models.Model):
     LEVELS = [
@@ -7,18 +8,21 @@ class Player(models.Model):
         ('N/A', 'N/A'),
     ]
     TEAMNAME = [
-        ('Name1', 'Name1'),
-        ('Name2', 'Name2'),
-        ('Name3', 'Name3'),
-        ('Name4', 'Name4'),
-        ('Name5', 'Name5'),
-        ('Name6', 'Name6'),
-        ('Name7', 'Name7'),
+        ('Wardique', 'Wardique'),
+        ('Tochka', 'Tochka'),
+        ('Palmer', 'Palmer'),
+        ('Bristol', 'Bristol'),
+        ('Waffels', 'Waffels'),
+        ('Tonys', 'Tonys'),
+        ('Platinum', 'Platinum'),
         ('N/A', 'N/A'),
     ]
-    firstName = models.CharField("First Name", max_length=200)
-    lastName = models.CharField("Last Name", max_length=200)
+    name = models.CharField("First & last name", max_length=200)
     email = models.CharField("Email", max_length=200)
     teamLevel = models.CharField("Team Level", max_length=200, choices=LEVELS, blank=False)
     teamName = models.CharField("Team Name", max_length=200, choices=TEAMNAME, blank=False)
     phoneNum = models.CharField("Phone Number", max_length=200)
+    def __str__(self):
+       return self.name
+    def get_absolute_url(self):
+       return reverse('player-detail', args=[str(self.id)])
