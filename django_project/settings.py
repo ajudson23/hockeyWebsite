@@ -22,8 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Add your app name here
     'hockey_app', 
+    'bootstrap5',
 ]
 
 # Add support for authenticating users

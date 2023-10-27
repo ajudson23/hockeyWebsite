@@ -1,0 +1,20 @@
+{% extends 'hockey_app/base_template.html' %}
+{% block content %}
+
+<h1>Player List</h1>
+<a class="btn btn-primary" href="{% url 'create_player' %}" role="button">New</a>
+{% if player_list %}
+<ul>
+    {% for player in player_list %}
+    <li>
+        <a href="{{ player.get_absolute_url }}">{{ player.name }}</a>
+        <a class="btn btn-primary" href="{% url 'delete-player' pk=player.id %}" role="button">Delete</a>
+        <a class="btn btn-primary" href="{% url 'update-player' pk=player.pk %}" role="button">Update</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no players registered.</p>
+{% endif %}
+
+{% endblock %}
