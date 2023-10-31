@@ -7,4 +7,7 @@
 <p><strong>Team Level:</strong> {{ player.teamLevel }}</p>
 <p><strong>Team Name:</strong> {{ player.teamName }}</p>
 
+<a class="btn btn-primary" href="{% url 'delete-player' pk=player.id %}" role="button">Delete</a>
+<a class="btn btn-primary" href="{% url 'update-player' pk=player.pk %}" role="button">Update</a>
+
 {% endblock %}

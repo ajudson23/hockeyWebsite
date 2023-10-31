@@ -1,14 +1,35 @@
 {% extends "hockey_app/base_template.html" %}
+{% load static %}
 
 {% block content %}
-<h1>Colorado Springs Adult Hockey League</h1>
+<div class="content-padding">
+    <h1>Welcome!</h1>
+    <h5>A little about us ...</h5>
+    <p>The Colorado Springs Adult league started up in .. This program is for ..</p>
+    <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="{% static 'images/homePic1.jpg' %}" style="width:100%">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="{% static 'images/homePic2.jpeg' %}" style="width:100%">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="{% static 'images/homePic3.jpeg' %}" style="width:100%">
+                </div>
+            </div>
+    </div>
+    <h1>Schedules</h1>
+    <p>coming soon with next sprint</p>
+    <h1>Standings</h1>
+    <p>coming soon with next sprint</p>
+</div>
 
-<h2>List of Players</h2>
-<ul class="list-group">
-    {% for player in players_registered %}
-    <li class="list-group-item">Name: {{ player.name }}
-        <a class="btn btn-primary" href="{% url 'player-detail' player.id %}" role="button">View</a>
-    </li>
-    {% endfor %}
-</ul>
+
+
+
 {% endblock %}

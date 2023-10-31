@@ -3,13 +3,15 @@
 
 <h1>Player List</h1>
 <a class="btn btn-primary" href="{% url 'create_player' %}" role="button">New</a>
+
+
 {% if player_list %}
-<ul>
+<ul class="list-group">
     {% for player in player_list %}
-    <li>
-        <a href="{{ player.get_absolute_url }}">{{ player.name }}</a>
-        <a class="btn btn-primary" href="{% url 'delete-player' pk=player.id %}" role="button">Delete</a>
-        <a class="btn btn-primary" href="{% url 'update-player' pk=player.pk %}" role="button">Update</a>
+    <li class="list-group-item">Name: {{ player.name }}
+        <p><strong>Team Level:</strong> {{ player.teamLevel }}
+        <strong>Team Name:</strong> {{ player.teamName }}</p>
+        <a class="btn btn-primary" href="{% url 'player-detail' player.id %}" role="button">View</a>
     </li>
     {% endfor %}
 </ul>
