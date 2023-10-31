@@ -1,22 +1,22 @@
 {% extends 'hockey_app/base_template.html' %}
 {% block content %}
 
-<h1>Player List</h1>
-<a class="btn btn-primary" href="{% url 'create_player' %}" role="button">New</a>
-
-
-{% if player_list %}
-<ul class="list-group">
-    {% for player in player_list %}
-    <li class="list-group-item">Name: {{ player.name }}
-        <p><strong>Team Level:</strong> {{ player.teamLevel }}
-        <strong>Team Name:</strong> {{ player.teamName }}</p>
-        <a class="btn btn-primary" href="{% url 'player-detail' player.id %}" role="button">View</a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>There are no players registered.</p>
-{% endif %}
-
+<div class="content-padding">
+    <h1>Player List</h1>
+    <a class="btn btn-primary" href="{% url 'create_player' %}" role="button">New</a>
+    <h1></h1>
+    {% if player_list %}
+    <ul class="list-group">
+        {% for player in player_list %}
+        <li class="list-group-item">Name: {{ player.name }}
+            <p><strong>Team Level:</strong> {{ player.teamLevel }}
+            <strong>Team Name:</strong> {{ player.teamName }}</p>
+            <a class="btn btn-primary" href="{% url 'player-detail' player.id %}" role="button">View</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>There are no players registered.</p>
+    {% endif %}
+</div>
 {% endblock %}
