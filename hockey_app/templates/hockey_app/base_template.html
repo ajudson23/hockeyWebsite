@@ -7,43 +7,113 @@
     <title>Adult League Hockey</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <style>
+        .navbar { 
+            background-color: black;
+        }
+        .logo {
+            width: 75px;
+            height: 75px;
+        }
+        h1 {
+            color: #FDB935;
+        }
+        .dropdown{
+            background-color: white;
+        }
+        .dropdown-menu:hover {
+            color: #FDB935;
+        }
+        .dropdown{
+            margin-right: 100px;
+        }  
+
+        .content-padding {
+            padding-left: 50px; 
+            padding-top: 100px;
+            padding-bottom: 100px;
+            padding-right: 50px;
+        }
+        .image-overlay {
+            position: relative;
+        }
+
+        .image-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fdba35b5); /* You can adjust the colors and opacity */
+            pointer-events: none;
+        }
+        .col-md-4{
+            height: 300px; /* Set your desired height */
+            overflow: hidden; /* Hide any image overflow */
+        }
+        .thumbnail img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            object-position: center center;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100; /* Ensure it appears above other content */
+        }
+        .btn-primary{
+            background-color: black;
+            border:black;
+        }
+        .btn-primary:hover {
+            background-color: #FDB935; 
+        }
+    </style>
+
 </head>
 
 <body>
-    <div class="container-fluid">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <img src="{% static 'logo2.png' %}">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
-                        class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Menu 1</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Menu 2</a>
-                        </li>
-                    </ul>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <img src="{% static 'images/logo2.png' %}" alt="Image Description" class="logo">
+            <h1 class="website-name">Colorado Springs Adult Hockey League</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                    class="navbar-toggler-icon"></span></button>
+
+                <ul class="navbar-nav">
+                    <a class="btn btn-warning" href="{% url 'index' %}">Home</a>
+                </ul>
+            
+            <!-- Add a "Menu" dropdown -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown">
+                    Menu
+                </button>
+                <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                    <a class="dropdown-item" href="#">Sign In</a>
+                    <a class="dropdown-item" href="#">Sign Up</a>
+                    <a class="dropdown-item" href="{% url 'player' %}">Players</a>
+                    <a class="dropdown-item" href="#">Schedules</a>
                 </div>
             </div>
-        </nav>
+    
+        </div>
+    </nav>
 
-
-        <!-- add block content from html template -->
-        {% block content %}
-
-
-        {% endblock %}
-    </div>
+    {% block content %}
+    
+    {% endblock %}
 </body>
 
 </html>
