@@ -49,7 +49,20 @@ def logout_user(request):
 
 
 def register_user(request):
-    return render(request, 'hockey_app/register_user.html', {})
+    if request.method == "POST":
+        form = UserCreationForm(request.POST) # this will give the django form 
+        if form.is_valid():
+            form.save()
+            # below we santitize the feild inputs -- good for cyber security and safe coding practices
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1'] # there typically two passwords that you type in when registering 
+            # authenticate user & sign in user after creation of account
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ("Registration Successful"))
+    else:   # this means that the form hasn't been filled out so we need to sent it
+        form = UserCreationForm()
+    return render(request, 'hockey_app/register_user.html', {'form':form,})
 
 class PlayerListView(generic.ListView):
    model = Player

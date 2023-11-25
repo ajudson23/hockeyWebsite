@@ -1,7 +1,17 @@
 {% extends 'hockey_app/base_template.html' %}
 {% block content %}
-<div>
-    </br></br></br></br></br>
+
+{% if form.errors %}
+    <p>There was an error with your form.</p>
+{% endif %}
+<div class="content-padding">
     <h1>Register User</h1>
+    <form action="{% url 'register_user' %}" method="POST">
+        {% csrf_token%}
+        <!-- this imports the dango pre created form -->
+        {{ form }}
+        </br></br></br>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
 </div>
 {% endblock %}
