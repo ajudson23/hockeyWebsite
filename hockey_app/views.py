@@ -6,7 +6,8 @@ from .forms import *
 from datetime import datetime
 import calendar
 from calendar import HTMLCalendar
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages # this will pop up a message if they get pass/user wrong
 
 def index(request):
     current_datetime = datetime.now()
@@ -21,6 +22,12 @@ def index(request):
     players_registered = Player.objects.all()
     #print("Player's registered to Adult Hockey League ", players_registered)
     return render( request, 'hockey_app/index.html', {'players_registered':players_registered, "year": year, "month": month, "month_number": month_number, "cal": cal})
+
+def login_user(request):
+    return render( request, 'hockey_app/login.html', {})
+
+def logout_user(request):
+    pass
 
 class PlayerListView(generic.ListView):
    model = Player

@@ -101,7 +101,11 @@
                     Menu
                 </button>
                 <div class="dropdown-menu" aria-labelledby="menuDropdown">
-                    <a class="dropdown-item" href="#">Sign In</a>
+                    {% if user.is_authenticated %}
+                        <a class="dropdown-item" href="#">Sign Out</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'login' %}">Sign In</a>
+                    {% endif %}
                     <a class="dropdown-item" href="#">Sign Up</a>
                     <a class="dropdown-item" href="{% url 'player' %}">Players</a>
                     <a class="dropdown-item" href="#">Schedules</a>
