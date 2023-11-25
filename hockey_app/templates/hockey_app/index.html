@@ -42,9 +42,8 @@
 <div class="content-padding">
 <div>
     <h1>Schedules</h1>
-    <h2>Game Schedules for {{month}}, {{year}}</h2>
-    <p>{{month_number}}</p>
-
+    <center><h2>{{ cal|safe }}</h2></center><!-- "|" this is called a filter & "safe" will render the html calendar -->
+    
 </div>
     
 

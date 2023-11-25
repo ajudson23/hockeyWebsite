@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views import generic
 from .models import *
-from .forms import * # <-- NEW
+from .forms import * 
 from datetime import datetime
 import calendar
 from calendar import HTMLCalendar
@@ -12,11 +12,20 @@ def index(request):
    current_datetime = datetime.now()
    year=current_datetime.year
    month=current_datetime.strftime('%B')  # Full month name, e.g., 'November'
-   month_number = current_datetime.month# convert month f/ name to #
+   month_number = current_datetime.month  # convert month f/ name to #
+   month_number = int(month_number)       # ensure that month is an int
+
+    # create calendar
+   cal = HTMLCalendar().formatmonth(year, month_number)
 
    players_registered = Player.objects.all()
    print("Player's registered to Adult Hockey League ", players_registered)
-   return render( request, 'hockey_app/index.html', {'players_registered':players_registered, "year": year, "month": month, "month_number": month_number})
+   return render( request, 'hockey_app/index.html', 
+        {'players_registered':players_registered, 
+         "year": year, 
+         "month": month, 
+         "month_number": month_number, 
+         "cal": cal})
 
 class PlayerListView(generic.ListView):
    model = Player
