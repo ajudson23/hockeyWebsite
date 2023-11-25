@@ -8,6 +8,8 @@ import calendar
 from calendar import HTMLCalendar
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages # this will pop up a message if they get pass/user wrong
+from django.contrib.auth.forms import UserCreationForm
+
 
 def index(request):
     current_datetime = datetime.now()
@@ -44,6 +46,10 @@ def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out!")
     return redirect('index')
+
+
+def register_user(request):
+    return render(request, 'hockey_app/register_user.html', {})
 
 class PlayerListView(generic.ListView):
    model = Player
