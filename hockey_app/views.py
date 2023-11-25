@@ -3,13 +3,16 @@ from django.http import HttpResponse
 from django.views import generic
 from .models import *
 from .forms import * # <-- NEW
+from datetime import datetime
 
 
 def index(request):
-   # Render index.html
+   current_datetime = datetime.now()
+   year=current_datetime.year
+   month=current_datetime.strftime('%B')  # Full month name, e.g., 'November'
    players_registered = Player.objects.all()
    print("Player's registered to Adult Hockey League ", players_registered)
-   return render( request, 'hockey_app/index.html', {'players_registered':players_registered})
+   return render( request, 'hockey_app/index.html', {'players_registered':players_registered, "year": year, "month": month})
 
 class PlayerListView(generic.ListView):
    model = Player
