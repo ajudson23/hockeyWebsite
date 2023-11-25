@@ -20,16 +20,30 @@ def index(request):
     cal = HTMLCalendar().formatmonth(year, month_number)
 
     players_registered = Player.objects.all()
-    #print("Player's registered to Adult Hockey League ", players_registered)
+    # print("Player's registered to Adult Hockey League ", players_registered)
     return render( request, 'hockey_app/index.html', {'players_registered':players_registered, "year": year, "month": month, "month_number": month_number, "cal": cal})
 
 def login_user(request):
-    return render( request, 'hockey_app/login.html', {})
+    if request.method == "POST":
+        username = request.POST['username'] # Get the username 
+        password = request.POST['password'] # Get the password
+        user = authenticate(request, username=username, password=password) 
+        # make sure it checks out and is correct info
+        if user is not None:
+            login(request, user) # this is using the login function that we imported thru django
+            messages.success(request, ("You have been logged in!"))
+            return redirect('index')
+        else:
+            messages.success(request, ("Error: login not successful, please try again."))
+            return render( request, 'hockey_app/login.html', {}) # redirect to the login page
+    else:
+        return render( request, 'hockey_app/login.html', {})
+    
 
 def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out!")
-    return redirect('hockey_app/index.html')
+    return redirect('index')
 
 class PlayerListView(generic.ListView):
    model = Player
