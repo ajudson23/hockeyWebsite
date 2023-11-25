@@ -19,13 +19,8 @@ def index(request):
    cal = HTMLCalendar().formatmonth(year, month_number)
 
    players_registered = Player.objects.all()
-   print("Player's registered to Adult Hockey League ", players_registered)
-   return render( request, 'hockey_app/index.html', 
-        {'players_registered':players_registered, 
-         "year": year, 
-         "month": month, 
-         "month_number": month_number, 
-         "cal": cal})
+   #print("Player's registered to Adult Hockey League ", players_registered)
+   return render( request, 'hockey_app/index.html', {'players_registered':players_registered, "year": year, "month": month, "month_number": month_number, "cal": cal})
 
 class PlayerListView(generic.ListView):
    model = Player
